@@ -11,48 +11,73 @@
       crossorigin="anonymous"
     />
     <style>
+      nav {
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+      }
       #display {
         display: grid;
-        flex-wrap: wrap;
         grid-template-columns: repeat(3, 1fr);
         background-color: brown;
       }
-      #display .carding{
+      #display .carding {
+        flex-wrap: wrap;
         margin: 20% 20% 5% 20%;
         border-radius: 30px;
       }
-      #display .img1{
+      #display .img1 {
         border-radius: 30px;
+        width: 18rem;
+        height: 18rem;
       }
-      ul{
+      ul {
         display: flex;
         justify-content: space-between;
         align-items: center;
         background-color: blueviolet;
       }
-      ul li{
+      ul li {
         list-style-type: none;
         background-color: blanchedalmond;
         padding: 10px 10px;
         cursor: pointer;
       }
-      ul li:hover{
+      ul li:hover {
         background-color: aquamarine;
         border-bottom: solid medium red;
+      }
+      #spinner {
+        width: 6rem;
+        height: 6rem;
+        border-width: 0.5rem;
+      }
+      #cart {
+        width: 3rem;
+        height: 3rem;
+        margin-right: 35px;
+      }
+      #cartDisplay {
+        font-size: 30px;
+        color: brown;
       }
     </style>
   </head>
   <body>
-    <h1>Asynchronous Programming</h1>
+    <h1>
+      Asynchronous Programming
+    </h1>
 
     <nav>
-        <ul id="catBar">
-            <li><button id="all">ALL</button></li>
-            <li><button id="jewelry">JEWELRY</button></li>
-            <li><button id="electronics">ELECTRONICS</button></li>
-            <li><button id="menCloth">MEN'S CLOTH</button></li>
-            <li><button id="womenCloth">WOMEN'S CLOTH</button></li>
-        </ul>
+      <ul id="catBar">
+        <li><button id="all">ALL</button></li>
+        <li><button id="jewelry">JEWELRY</button></li>
+        <li><button id="electronics">ELECTRONICS</button></li>
+        <li><button id="menCloth">MEN'S CLOTH</button></li>
+        <li><button id="womenCloth">WOMEN'S CLOTH</button></li>
+        <p id="cartDisplay"></p>
+        <img src="./addToCart.png" alt="" id="cart" />
+      </ul>
     </nav>
 
     <div>
@@ -64,11 +89,10 @@
 
     <script src="./async2.js"></script>
     <!-- <script src="./async.js"></script> -->
-   
   </body>
   <script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-  crossorigin="anonymous"
-></script>
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
 </html>
