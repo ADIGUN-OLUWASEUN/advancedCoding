@@ -14,6 +14,8 @@
             <h5 class="card-title carding-title">${title}</h5>
             <p class="card-text carding-text">${description}</p>
             <p class="card-text carding-price">$${price}</p>
+            <button onclick="delete(${i})">DELETE</button>
+
           </div>
         </div>
       `;
