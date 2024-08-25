@@ -3,8 +3,8 @@ let jewelry = document.getElementById("jewelry");
 let electronics = document.getElementById("electronics");
 let menCloth = document.getElementById("menCloth");
 let womenCloth = document.getElementById("womenCloth");
-let cartDisplay = document.getElementById('cartDisplay');
-let cart = document.getElementById('cart');
+let cartDisplay = document.getElementById("cartDisplay");
+let cart = document.getElementById("cart");
 
 async function getAllProducts() {
   try {
@@ -51,7 +51,9 @@ all.addEventListener("click", () => {
           <div class="card-body">
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
-           <p class="card-text">$${price}</p>
+          <p class="card-text">$${price}</p>
+          <button onclick="addToCart(${i})">ADD TO CART</button>
+
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
       </div>
       </div>
@@ -85,6 +87,8 @@ jewelry.addEventListener("click", () => {
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
            <p class="card-text">$${price}</p>
+            <button onclick="addToCart(${i})">ADD TO CART</button>
+
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
       </div>
       </div>
@@ -118,6 +122,8 @@ electronics.addEventListener("click", () => {
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
            <p class="card-text">$${price}</p>
+          <button onclick="addToCart(${i})">ADD TO CART</button>
+
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
       </div>
       </div>
@@ -150,7 +156,9 @@ menCloth.addEventListener("click", () => {
           <div class="card-body">
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
-           <p class="card-text">$${price}</p>
+          <p class="card-text">$${price}</p>
+          <button onclick="addToCart(${i})">ADD TO CART</button>
+
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
       </div>
       </div>
@@ -183,7 +191,9 @@ womenCloth.addEventListener("click", () => {
           <div class="card-body">
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
-           <p class="card-text">$${price}</p>
+          <p class="card-text">$${price}</p>
+          <button onclick="addToCart(${i})">ADD TO CART</button>
+
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
       </div>
       </div>
@@ -206,20 +216,18 @@ function productDetails(i) {
   window.location.href = "./async3.html";
 }
 
-function addToCart(i){
+function addToCart(i) {
   let products = JSON.parse(localStorage.getItem("allProducts"));
   let selectedProduct = products[i];
   let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
- cartArray.push(selectedProduct)
- localStorage.setItem("cartArray", JSON.stringify(cartArray));
-
- cartDisplay.textContent = cartArray.length
-
+  cartArray.push(selectedProduct);
+  localStorage.setItem("cartArray", JSON.stringify(cartArray));
+ cartDisplay.textContent = cartArray.length;
 }
 
-cart.addEventListener('click', ()=>{
+cart.addEventListener("click", () => {
   window.location.href = "./cart.html";
-})
+});
 
 //Data Destructuring
 
