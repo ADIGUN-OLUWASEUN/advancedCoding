@@ -9,7 +9,7 @@ let cart = document.getElementById("cart");
 async function getAllProducts() {
   try {
     spinner.classList.remove("d-none");
-    let response = await fetch("https://fakestoreapi.com/products");
+    let response = await fetch("./data.json");
     let actualData = await response.json();
     display.innerHTML = "";
     actualData.forEach((product, i) => {
@@ -40,7 +40,8 @@ all.addEventListener("click", () => {
   async function getAllProducts() {
     try {
       spinner.classList.remove("d-none");
-      let response = await fetch("https://fakestoreapi.com/products");
+      // let response = await fetch("https://fakestoreapi.com/products");
+      let response = await fetch('./data.json')
       let actualData = await response.json();
       display.innerHTML = "";
       actualData.forEach((product, i) => {
@@ -73,9 +74,11 @@ jewelry.addEventListener("click", () => {
   async function getAllProducts() {
     try {
       spinner.classList.remove("d-none");
-      let response = await fetch(
-        "https://fakestoreapi.com/products/category/jewelery"
-      );
+      // let response = await fetch(
+      //   "https://fakestoreapi.com/products/category/jewelery"
+      // );
+      let response = await fetch('./data.json')
+
       let actualData = await response.json();
       display.innerHTML = "";
       actualData.forEach((product, i) => {
@@ -220,7 +223,23 @@ function addToCart(i) {
   let products = JSON.parse(localStorage.getItem("allProducts"));
   let selectedProduct = products[i];
   let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
-  cartArray.push(selectedProduct);
+
+  let found = false
+  cartArray.forEach((el,i)=>{
+    if(el.id == selectedProduct.id){
+      found = true
+      console.log(cartArray[i].count);
+      cartArray[i].count = cartArray[i].count+1      
+    }
+    // else{
+
+    // }
+  })
+
+  if(!found){
+    selectedProduct.count = 1
+    cartArray.push(selectedProduct);
+  }
   localStorage.setItem("cartArray", JSON.stringify(cartArray));
  cartDisplay.textContent = cartArray.length;
 }
@@ -228,6 +247,9 @@ function addToCart(i) {
 cart.addEventListener("click", () => {
   window.location.href = "./cart.html";
 });
+
+
+
 
 //Data Destructuring
 
