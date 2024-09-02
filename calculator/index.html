@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="container">
+        <input class="display" id="displayScreen">
+        <input class="display" id="answerScreen">
+
+        <div class="topBtn">
+            <button class="btncomp1" disabled>MC</button>
+            <button class="btncomp1" disabled>MR</button>
+            <button class="btncomp1"><b>M+</b></button>
+            <button class="btncomp1"><b>M-</b></button>
+            <button class="btncomp1"><b>MS</b></button>
+            <button class="btncomp1" disabled>M</button>
+        </div>
+
+        <div class="bottomBtn">
+            <button class="btnComp" onclick="displayOperator('%')" id="displayBtn">%</button>
+            <button class="btnComp" onclick="showDisplay('CE')">CE</button>
+            <button class="btnComp" onclick="clearDisplay()">C</button>
+            <button class="btnComp" onclick="displayOperator('x')">x</button>
+            <button class="btnComp" onclick="displayOperator('1/x')">1/<sub>x</sub></button>
+            <button class="btnComp" onclick="showDisplay('x&sup2;')">x&sup2;</button>
+            <button class="btnComp" onclick="showDisplay('2&radic;x')">2&radic;x</button>
+            <button class="btnComp" onclick="displayOperator('/')">/</button>
+            <button class="btnComp" onclick="showDisplay('7')">7</button>
+            <button class="btnComp" onclick="showDisplay('8')">8</button>
+            <button class="btnComp" onclick="showDisplay('9')">9</button>
+            <button class="btnComp" onclick="displayOperator('*')">*</button>
+            <button class="btnComp" onclick="showDisplay('4')">4</button>
+            <button class="btnComp" onclick="showDisplay('5')">5</button>
+            <button class="btnComp" onclick="showDisplay('6')">6</button>
+            <button class="btnComp" onclick="displayOperator('-')">-</button>
+            <button class="btnComp" onclick="showDisplay('1')">1</button>
+            <button class="btnComp" onclick="showDisplay('2')">2</button>
+            <button class="btnComp" onclick="showDisplay('3')">3</button>
+            <button class="btnComp" onclick="displayOperator('+')">+</button>
+            <button class="btnComp" onclick="displayOperator('&plusmn')">&plusmn</button>
+            <button class="btnComp" onclick="showDisplay('0')">0</button>
+            <button class="btnComp" onclick="showDisplay('.')">.</button>
+            <button class="btnComp" onclick="calculate2()">=</button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
