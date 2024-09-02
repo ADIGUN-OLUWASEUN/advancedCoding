@@ -73,7 +73,7 @@ function displayQuestion(index) {
         let checked = userAnswers[index] === question.options[i] ? 'checked' : '';
         optionsHTML += `
             <div class="ms-4">
-                <input value="${question.options[i]}" class="form-check-input bg-primary" type="radio" name="flexRadioDefault" id="option${i}" ${checked}>
+                <input value="${question.options[i]}" class="form-check-input bg-primary option" type="radio" name="flexRadioDefault" id="option${i}" ${checked}>
                 <label class="form-check-label" for="option${i}">${question.options[i]}</label>
             </div>
         `;

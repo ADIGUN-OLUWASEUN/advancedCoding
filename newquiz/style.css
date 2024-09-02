@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: aqua;
+}
+header{
+    text-align: center;
+    background-color: brown;
+    font-size: 32px;
+}
+.timerWrapper{
+    color: yellowgreen;
+}
+#startBTN, #prevButton, #nextButton, #submitBtn, #tryAgain{
+    background-color: chocolate;
+    color: whitesmoke;
+    width: 10%;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 9px;
+    margin: 10px;
+}
+#startBTN:hover, #prevButton:hover, #nextButton:hover, #submitBtn:hover, #tryAgain:hover{
+    background-color: chartreuse;
+    width: 15%;
+    height: 35px;
+}
+h1{
+    text-align: center;
+    font-size: 30px;
+    color: blue;
+}
+#resultWrapper{
+    text-align: center;
+    font-size: 32px;
+    background-color: darkorchid;
+    color: khaki;
+}
+.btnFlex{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+fieldset{
+    background-color: blueviolet;
+    height: 40vh;
+}
+legend{
+    color: white;
+    font-size: 27px;
+    font-weight: bolder;
+}
+.option{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
