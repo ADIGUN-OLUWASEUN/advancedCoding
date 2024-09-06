@@ -10,20 +10,32 @@ function displayAllCart() {
 
   const cartProduct = JSON.parse(localStorage.getItem("cartArray")) || [];
 
-  quantity.textContent =
-    `Number of items to be bought are : ${cartProduct.length}`.toUpperCase();
+  // quantity.textContent =
+  //   `Number of items to be bought are : ${cartProduct.length}`.toUpperCase();
+
+    // let totalItems = 0;
+  let totalAmount = 0;
 
   displayCart.innerHTML = "";
 
   if (cartProduct.length > 0) {
     cartProduct.forEach((prod, i) => {
-      const { image, title, description, price } = prod;
+      const { image, title, description, price, count } = prod;
+
+      // totalItems += count; 
+      totalAmount += price * count; 
+
+
+    amount.textContent = `TOTAL AMOUNT : $${totalAmount.toFixed(2)}`;
+    quantity.textContent = `Number of items to be bought are : ${cartProduct.reduce((total, item) => total + item.count, 0)}`.toUpperCase();
+
+    // quantity.textContent = `Number of items to be bought: ${totalItems}`.toUpperCase();
 
       // totalAmount += +price;
-      let totalAmount = cartProduct.reduce((acc, curr) => {
-        return acc + curr.price;
-      }, 0);
-      amount.textContent = `TOTAL AMOUNT : $${totalAmount.toFixed(2)}`;
+      // let totalAmount = cartProduct.reduce((acc, curr) => {
+      //   return acc + curr.price;
+      // }, 0);
+      // amount.textContent = `TOTAL AMOUNT : $${totalAmount.toFixed(2)}`;
 
       displayCart.innerHTML += `
           <div class="card carding">
@@ -35,6 +47,7 @@ function displayAllCart() {
                     100
                   )}</p>
                   <p class="card-text carding-price">$${price}</p>
+                   <p class="card-text">Quantity: ${count}</p>
                   <button onclick="deleteItem(${i})">DELETE</button>
                   <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
 

@@ -13,7 +13,7 @@ async function getAllProducts() {
     let actualData = await response.json();
     display.innerHTML = "";
     actualData.forEach((product, i) => {
-      const { image, title, description, price } = product;
+      const { image, title, description, price, count= 0 } = product;
       display.innerHTML += `
         <div class="card carding" style="width: 18rem;">
        <img class="card-img-top img1" src="${image}" alt="Card image cap">
@@ -21,6 +21,8 @@ async function getAllProducts() {
         <h5 class="card-title">${title}</h5>
         <p class="card-text">${description.slice(0, 100)}...</p>
          <p class="card-text">$${price}</p>
+                   
+
          <button onclick="addToCart(${i})">ADD TO CART</button>
          <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
     </div>
@@ -45,7 +47,7 @@ all.addEventListener("click", () => {
       let actualData = await response.json();
       display.innerHTML = "";
       actualData.forEach((product, i) => {
-        const { image, title, description, price } = product;
+        const { image, title, description, price , count= 0} = product;
         display.innerHTML += `
           <div class="card carding" style="width: 18rem;">
          <img class="card-img-top img1" src="${image}" alt="Card image cap">
@@ -53,6 +55,7 @@ all.addEventListener("click", () => {
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
           <p class="card-text">$${price}</p>
+
           <button onclick="addToCart(${i})">ADD TO CART</button>
 
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
@@ -82,7 +85,7 @@ jewelry.addEventListener("click", () => {
       let actualData = await response.json();
       display.innerHTML = "";
       actualData.forEach((product, i) => {
-        const { image, title, description, price } = product;
+        const { image, title, description, price, count= 0 } = product;
         display.innerHTML += `
           <div class="card carding" style="width: 18rem;">
          <img class="card-img-top img1" src="${image}" alt="Card image cap">
@@ -90,6 +93,7 @@ jewelry.addEventListener("click", () => {
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
            <p class="card-text">$${price}</p>
+
             <button onclick="addToCart(${i})">ADD TO CART</button>
 
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
@@ -117,7 +121,7 @@ electronics.addEventListener("click", () => {
       let actualData = await response.json();
       display.innerHTML = "";
       actualData.forEach((product, i) => {
-        const { image, title, description, price } = product;
+        const { image, title, description, price, count= 0 } = product;
         display.innerHTML += `
           <div class="card carding" style="width: 18rem;">
          <img class="card-img-top img1" src="${image}" alt="Card image cap">
@@ -125,6 +129,7 @@ electronics.addEventListener("click", () => {
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
            <p class="card-text">$${price}</p>
+
           <button onclick="addToCart(${i})">ADD TO CART</button>
 
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
@@ -152,7 +157,7 @@ menCloth.addEventListener("click", () => {
       let actualData = await response.json();
       display.innerHTML = "";
       actualData.forEach((product, i) => {
-        const { image, title, description, price } = product;
+        const { image, title, description, price , count= 0} = product;
         display.innerHTML += `
           <div class="card carding" style="width: 18rem;">
          <img class="card-img-top img1" src="${image}" alt="Card image cap">
@@ -160,6 +165,7 @@ menCloth.addEventListener("click", () => {
           <h5 class="card-title">${title}</h5>
           <p class="card-text">${description.slice(0, 100)}...</p>
           <p class="card-text">$${price}</p>
+
           <button onclick="addToCart(${i})">ADD TO CART</button>
 
            <a href="#" class="btn btn-primary" onclick="productDetails(${i})">CHECK DETAILS</a>
@@ -187,7 +193,7 @@ womenCloth.addEventListener("click", () => {
       let actualData = await response.json();
       display.innerHTML = "";
       actualData.forEach((product, i) => {
-        const { image, title, description, price } = product;
+        const { image, title, description, price, count= 0 } = product;
         display.innerHTML += `
           <div class="card carding" style="width: 18rem;">
          <img class="card-img-top img1" src="${image}" alt="Card image cap">
@@ -224,24 +230,31 @@ function addToCart(i) {
   let selectedProduct = products[i];
   let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
 
-  let found = false
-  cartArray.forEach((el,i)=>{
-    if(el.id == selectedProduct.id){
-      found = true
-      console.log(cartArray[i].count);
-      cartArray[i].count = cartArray[i].count+1      
-    }
-    // else{
+  // let count = false
+  // cartArray.forEach((el,i)=>{
+  //   if(el.id === selectedProduct.id){
+  //     count = true
+  //     console.log(cartArray[i].count);
+  //     cartArray[i].count = cartArray[i].count + 1      
+  //   }
+  // })
 
-    // }
-  })
+  // if(!count){
+  //   selectedProduct.count = 1
+  //   cartArray.push(selectedProduct);
+  // }
 
-  if(!found){
-    selectedProduct.count = 1
+  let found = cartArray.find((el) => el.id === selectedProduct.id);
+
+  if (found) {
+    found.count += 1;  // Increase the count if the product is already in the cart
+  } else {
+    selectedProduct.count = 1;  // Set the count to 1 for new items
     cartArray.push(selectedProduct);
   }
   localStorage.setItem("cartArray", JSON.stringify(cartArray));
- cartDisplay.textContent = cartArray.length;
+  cartDisplay.textContent = cartArray.reduce((total, item) => total + item.count, 0);
+//  cartDisplay.textContent = cartArray.length;
 }
 
 cart.addEventListener("click", () => {
