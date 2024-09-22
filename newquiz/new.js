@@ -22,7 +22,7 @@ const questions = [
     {
         question: 'Which of the following keywords is used to define a variable in Javascript?',
         options: ['let', 'var', 'Both A and B', 'None of the above'],
-        answer: 'Both A and B',
+        answer: 'Both A and B'
     }
 ];
 
@@ -38,10 +38,14 @@ let startButton = document.getElementById('startBTN');
 let quest = document.getElementById('questions');
 let nextButton = document.getElementById('nextBTN');
 let prevButton = document.getElementById('prevBTN');
+let tryingAgain = document.getElementById('tryAgain');
+
+tryingAgain.style.display = 'none'
 
 function startBTN() {
     interval = setInterval(timer, 1000);
     startButton.disabled = true; // Disabling the start button
+    startButton.style.display = 'none'
     displayQuestion(currentQuestionIndex);
 }
 
@@ -85,6 +89,11 @@ function displayQuestion(index) {
                 <legend><span>${index + 1}.</span> ${question.question}</legend>
                 ${optionsHTML}
             </fieldset>
+            <div class="row btn-wrapper btnFlex">
+        <button class="btn btn-primary" onclick="previousBtn()" id="prevButton">Previous</button>
+        <button class="btn btn-primary" onclick="nextBtn()" id="nextButton">Next</button>
+        <button class="btn btn-primary" onclick="submitBtn()" id="submitBtn">Submit</button>
+    </div>
         </div>
     `;
 
@@ -132,6 +141,18 @@ function submitBtn() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     resultWrapper.innerHTML = `Your score is ${score} out of ${questions.length}. You ${score > questions.length / 2 ? 'Passed' : 'Failed'}`;
+
+    startButton.style.display = 'block'
+    tryingAgain.style.display = 'block'
+
+    let selectedOption = document.querySelector('input[name="flexRadioDefault"]:checked');
+    console.log(selectedOption);
+    
+
+    if(!selectedOption){
+        // alert('You still have some unanswered question')
+        confirm('You still have some unanswered question, Are you sure you want to submit?')
+    }
 }
 
 function submitTest() {
@@ -145,6 +166,7 @@ function retryTest() {
     score = 0;
     maxSecs = 60;
     maxMins = 2;
+    interval = setInterval(timer, 1000);
     userAnswers = [];
     resultWrapper.innerHTML = '';
     displayQuestion(currentQuestionIndex);
