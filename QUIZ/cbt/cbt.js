@@ -1,7 +1,9 @@
+let start = document.getElementById('start');
 let questionWrapper = document.getElementsByClassName("questionWrapper")[0];
 let resultWrapper = document.getElementsByClassName("resultWrapper")[0];
 let submit = document.getElementById("submit");
 let score = 0;
+let currentIndex = 0;
 
 const questions = [
   {
@@ -53,49 +55,73 @@ const questions = [
   },
 ];
 
-window.onload = () => {
-  if (questions) {
-    questions.forEach((el, i) => {
-      questionWrapper.innerHTML += `
-        <div>
-             <p>${i + 1}. ${el.question}</p>
-             <div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault1" value = '${
-        el.options[0]
-      }'>
-      <label class="form-check-label" for="flexRadioDefault1">
-        ${el.options[0]}
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault2" value = '${
-        el.options[1]
-      }'>
-      <label class="form-check-label" for="flexRadioDefault2">
-            ${el.options[1]}
-      </label>
-    </div>
-     <div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault2" value = '${
-        el.options[2]
-      }' >
-      <label class="form-check-label" for="flexRadioDefault2">
-            ${el.options[2]}
-      </label>
-    </div>
-     <div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault2" value = '${
-        el.options[3]
-      }'>
-      <label class="form-check-label" for="flexRadioDefault2">
-            ${el.options[3]}
-      </label>
-    </div>
-                </div>
-            `;
-    });
-  }
-};
+start.addEventListener('click', ()=>{
+    displayQuestion()
+})
+
+function displayQuestion(){
+    if (questions) {
+        questions.forEach((el, i) => {
+            
+          questionWrapper.innerHTML = `
+            <div>
+             <fieldset>
+                    <legend><p>${i + 1}. ${el.question}</p></legend>
+                    <div>             <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault1" value = '${
+            el.options[0]
+          }'>
+          <label class="form-check-label" for="flexRadioDefault1">
+            ${el.options[0]}
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault2" value = '${
+            el.options[1]
+          }'>
+          <label class="form-check-label" for="flexRadioDefault2">
+                ${el.options[1]}
+          </label>
+        </div>
+         <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault2" value = '${
+            el.options[2]
+          }' >
+          <label class="form-check-label" for="flexRadioDefault2">
+                ${el.options[2]}
+          </label>
+        </div>
+         <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault2" value = '${
+            el.options[3]
+          }'>
+          <label class="form-check-label" for="flexRadioDefault2">
+                ${el.options[3]}
+          </label>
+        </div></div>
+            </fieldset>
+    
+                    </div>
+                `;
+        });
+      }
+      start.style.display = 'none'
+}
+
+
+previous.addEventListener('click', ()=>{
+   if (currentIndex = questions.length - 1) {
+        currentIndex--
+   }
+   displayQuestion()
+})
+
+next.addEventListener('click', ()=>{
+    if(currentIndex > 0){
+        currentIndex++
+    }
+    displayQuestion()
+})
 
 submit.addEventListener("click", () => {
   let canSubmit = confirm('Are you Sure?')
@@ -115,5 +141,6 @@ submit.addEventListener("click", () => {
     // window.scrollTo({top: 0, behavior: 'smooth'}) // scroll to the top
     window.scrollTo(0,0)   // scroll to the top
     resultWrapper.textContent = `Your score is ${score} out of ${questions.length}. You ${score > questions.length / 2 ? 'Passed' : 'Failed'}`;
+    submit.textContent = 'Try again'
   }
 });
